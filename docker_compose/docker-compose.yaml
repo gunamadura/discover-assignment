@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+
+  backend:
+    image: gunamadura/backend
+    container_name: backend
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/mydb
+      - NODE_ENV=production
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+
+  frontend:
+    image: gunamadura/new-frontend
+    container_name: frontend
+    restart: always
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_DATABASE=mydb
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
+volumes:
+  mongo-data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
