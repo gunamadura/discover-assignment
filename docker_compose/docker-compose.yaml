@@ -6,8 +6,6 @@ services:
     image: gunamadura/backend
     container_name: backend
     restart: always
-    ports:
-      - "8081:8081"
     environment:
       - MONGO_URL=mongodb://mongo:27017/mydb
       - NODE_ENV=production
@@ -17,11 +15,11 @@ services:
       - app-network
 
   frontend:
-    image: gunamadura/new-frontend
+    image: gunamadura/frontend
     container_name: frontend
     restart: always
     ports:
-      - "4200:4200"
+      - "80:80"
     depends_on:
       - backend
     networks:
