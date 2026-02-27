@@ -32,3 +32,4 @@ jobs:
 
     - name: Push Frontend Image
       run: docker push ${{ secrets.DOCKER_USERNAME }}/frontend:latest
+    

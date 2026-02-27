@@ -7,7 +7,7 @@ services:
     container_name: backend
     restart: always
     environment:
-      - MONGO_URL=mongodb://mongo:27017/mydb
+      - MONGO_URL=${MONGO_URI}
       - NODE_ENV=production
     depends_on:
       - mongo
